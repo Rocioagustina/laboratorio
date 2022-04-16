@@ -172,21 +172,6 @@ int main()
     	}
 
     	printf(MENSAJE_OPCION_TRES);
-    	printf(TARJETA_DE_DEBITO);
-    	printf(TARJETA_DE_CREDITO);
-    	printf(BITCOIN);
-    	printf(PRECIO_POR_KILOMETRO);
-    	printf(DIFERENCIA_DE_PRECIO_INGRESADA);
-    	printf(MENSAJE_OPCION_CUATRO);
-    	printf(PRECIO_TARJETA_DEBITO_AEROLINEAS);
-    	printf(PRECIO_TARJETA_CREDITO_AEROLINEAS);
-    	printf(PRECIO_CON_BITCOIN_AEROLINEAS);
-    	printf(PRECIO_UNITARIO_KM_AEROLINEAS);
-    	printf(PRECIO_TARJETA_DEBITO_LATAM);
-    	printf(PRECIO_TARJETA_CREDITO_LATAM);
-    	printf(PRECIO_CON_BITCOIN_LATAM);
-    	printf(PRECIO_UNITARIO_KM_LATAM);
-    	printf(DIFERENCIA_DE_PRECIO_ENTRE_AEROLINEAS);
     	if(flagCalculosRealizados == 1 && flagCalculosMostrados == 1)
     	{
     		printf(PRECIO_TARJETA_DEBITO_AEROLINEAS_INGRESADO, precioDebitoAerolineas);
@@ -198,6 +183,24 @@ int main()
 			printf(PRECIO_CON_BITCOIN_LATAM_INGRESADO, precioBitcoinLatam);
 			printf(PRECIO_UNITARIO_KM_LATAM_INGRESADO, precioPorKmLatam);
 			printf(DIFERENCIA_DE_PRECIO_ENTRE_AEROLINEAS_INGRESADA, diferenciaDePrecio);
+    	}
+    	else
+    	{
+        	printf(TARJETA_DE_DEBITO);
+        	printf(TARJETA_DE_CREDITO);
+        	printf(BITCOIN);
+        	printf(PRECIO_POR_KILOMETRO);
+        	printf(DIFERENCIA_DE_PRECIO_INGRESADA);
+        	printf(MENSAJE_OPCION_CUATRO);
+        	printf(PRECIO_TARJETA_DEBITO_AEROLINEAS);
+        	printf(PRECIO_TARJETA_CREDITO_AEROLINEAS);
+        	printf(PRECIO_CON_BITCOIN_AEROLINEAS);
+        	printf(PRECIO_UNITARIO_KM_AEROLINEAS);
+        	printf(PRECIO_TARJETA_DEBITO_LATAM);
+        	printf(PRECIO_TARJETA_CREDITO_LATAM);
+        	printf(PRECIO_CON_BITCOIN_LATAM);
+        	printf(PRECIO_UNITARIO_KM_LATAM);
+        	printf(DIFERENCIA_DE_PRECIO_ENTRE_AEROLINEAS);
     	}
     	printf(MENSAJE_OPCION_CINCO);
     	printf(MENSAJE_OPCION_SEIS);
