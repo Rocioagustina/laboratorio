@@ -9,3 +9,39 @@
 #include <stdlib.h>
 #include "arrayPassenger.h"
 
+initPassengers()
+{
+
+}
+
+addPassengers()
+{
+
+}
+
+findPassengerById()
+{
+
+}
+
+removePassenger()
+{
+
+}
+
+sortPassengers()
+{
+
+}
+
+printPassengers()
+{
+
+}
+
+sortPassengersByCode()
+{
+
+
+}
+
