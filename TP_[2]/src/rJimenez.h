@@ -48,11 +48,30 @@ int darAltaAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensaj
 					char mensajeExitoEstadoDeVuelo [TAM_STR], TypePassenger *listTypePassenger, StatusFlight *listStatusFlight,
 					char mensajeCargaCompleta [TAM_STR], int id, int minimo, int maximo);
 
-int DarBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
+int darBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
 					char mensajeExitoId [TAM_STR], char mensajeErrorBaja [TAM_STR], char mensajeExitoBaja [TAM_STR], char mensajeErrorIdNoEncontrado [TAM_STR]);
 
 
 int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
-					char mensajeExitoId [TAM_STR], char mensajeOpcion [TAM_STR]);
+					char mensajeExitoId [TAM_STR], char mensajeOpcion [TAM_STR], char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR],
+					char mensajeExitoModificar [TAM_STR], char mensajeModificarNombre [TAM_STR], char mensajeErrorModificarNombre [TAM_STR],
+					char mensajeExitoModificarNombre [TAM_STR], char mensajeModificarApellido [TAM_STR], char mensajeErrorModificarApellido [TAM_STR],
+					char mensajeExitoModificarApellido [TAM_STR], char mensajeModificarPrecio[TAM_STR], char mensajeErrorModificarPrecio [TAM_STR],
+					char mensajeExitoModificarPrecio [TAM_STR], char mensajeModificarTipoDePasajero [TAM_STR], char mensajeErrorModificarTipoDePasajero [TAM_STR],
+					char mensajeExitoModificarTipoDePasajero [TAM_STR], char mensajeModificarCodigoDeVuelo [TAM_STR],
+					char mensajeErrorModificarCodigoDeVuelo [TAM_STR],char mensajeExitoModificarCodigoDeVuelo [TAM_STR]);
+
+int modificarNombre (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR],	char mensajeExitoModificar [TAM_STR], Passenger *pasajero);
+
+int modificarApellido (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero);
+
+int modificarPrecio (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero);
+
+int modificarTipoDePasajero(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero,
+		int minimo, int maximo);
+
+int modificarCodigo(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero);
+
+
 
 #endif /* RJIMENEZ_H_ */

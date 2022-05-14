@@ -396,8 +396,9 @@ int darAltaAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensaj
 	return retorno;
 }
 
-int DarBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
-					char mensajeExitoId [TAM_STR], char mensajeErrorBaja [TAM_STR], char mensajeExitoBaja [TAM_STR], char mensajeErrorIdNoEncontrado [TAM_STR])
+int darBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
+					char mensajeExitoId [TAM_STR], char mensajeErrorBaja [TAM_STR], char mensajeExitoBaja [TAM_STR],
+					char mensajeErrorIdNoEncontrado [TAM_STR])
 {
 	int retorno;
 	int idBorrar;
@@ -430,11 +431,18 @@ int DarBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensa
 }
 
 int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
-					char mensajeExitoId [TAM_STR], char mensajeOpcion [TAM_STR])
+					char mensajeExitoId [TAM_STR], char mensajeOpcion [TAM_STR], char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR],
+					char mensajeExitoModificar [TAM_STR], char mensajeModificarNombre [TAM_STR], char mensajeErrorModificarNombre [TAM_STR],
+					char mensajeExitoModificarNombre [TAM_STR], char mensajeModificarApellido [TAM_STR], char mensajeErrorModificarApellido [TAM_STR],
+					char mensajeExitoModificarApellido [TAM_STR], char mensajeModificarPrecio[TAM_STR], char mensajeErrorModificarPrecio [TAM_STR],
+					char mensajeExitoModificarPrecio [TAM_STR], char mensajeModificarTipoDePasajero [TAM_STR], char mensajeErrorModificarTipoDePasajero [TAM_STR],
+					char mensajeExitoModificarTipoDePasajero [TAM_STR], char mensajeModificarCodigoDeVuelo [TAM_STR],
+					char mensajeErrorModificarCodigoDeVuelo [TAM_STR],char mensajeExitoModificarCodigoDeVuelo [TAM_STR])
 {
 	int retorno;
 	int idBorrar;
 	int indice;
+	int opcion;
 
 	retorno = 1;
 
@@ -445,12 +453,78 @@ int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mens
 		 indice = findPassengerById(listPassenger, tamanioDelArray, idBorrar);
 		 if(indice != -1)
 		 {
+
 			 printf(ELECCION_DE_MODIFICACION);
 			 printf(MODIFICAR_NOMBRE);
 			 printf(MODIFICAR_APELLIDO);
 			 printf(MODIFICAR_PRECIO);
 			 printf(MODIFICAR_TIPO_DE_PASAJERO);
 			 printf(MODIFICAR_CODIGO_DE_VUELO);
+			 printf(mensajeOpcion);
+			 pedirInt(mensajeModificar, mensajeErrorModificar, mensajeExitoModificar, &opcion, 1,5);
+
+			 switch(opcion)
+			 {
+			 case 1: if(modificarNombre (mensajeModificarNombre, mensajeErrorModificarNombre, mensajeExitoModificarNombre, &listPassenger[indice]) != -1)
+					 {
+						printf(mensajeExitoModificarNombre);
+						retorno = 0;
+					 }
+					 else
+					 {
+						printf(mensajeErrorModificarNombre);
+					 }
+					break;
+
+
+			 case 2: if(modificarApellido(mensajeModificarApellido, mensajeErrorModificarApellido, mensajeExitoModificarApellido, &listPassenger[indice])
+					 != -1)
+					 {
+						 printf(mensajeExitoModificarApellido);
+						 retorno = 0;
+					 }
+					 else
+					 {
+						 printf(mensajeErrorModificarApellido);
+					 }
+
+			 	 	break;
+
+			 case 3: if(modificarPrecio(mensajeModificarPrecio, mensajeErrorModificarPrecio, mensajeExitoModificarPrecio, &listPassenger[indice]) != -1)
+			 	 	 {
+				 	 	 printf(mensajeExitoModificarPrecio);
+				 	 	 retorno = 0;
+			 	 	 }
+			 	 	 else
+			 	 	 {
+			 	 		 printf(mensajeErrorModificarPrecio);
+			 	 	 }
+				 break;
+
+			 case 4: if(modificarTipoDePasajero(mensajeModificarTipoDePasajero, mensajeErrorModificarTipoDePasajero, mensajeExitoModificarTipoDePasajero,
+					 &listPassenger[indice], 0, 4) != -1)
+			 	 	 {
+				 	 	 printf(mensajeExitoModificarTipoDePasajero);
+				 	 	 retorno = 0;
+			 	 	 }
+			 	 	 else
+			 	 	 {
+			 	 		 printf(mensajeErrorModificarTipoDePasajero);
+			 	 	 }
+				 break;
+
+			 case 5:if(modificarCodigo(mensajeModificarCodigoDeVuelo, mensajeErrorModificarCodigoDeVuelo, mensajeExitoModificarCodigoDeVuelo,
+					 &listPassenger[indice]) != -1)
+			 	 	 {
+				 	 	 printf(mensajeExitoModificarCodigoDeVuelo);
+				 	 	 retorno = 0;
+			 	 	 }
+			 	 	 else
+			 	 	 {
+			 	 		 printf(mensajeErrorModificarCodigoDeVuelo);
+			 	 	 }
+				 break;
+			 }
 
 
 
@@ -460,5 +534,99 @@ int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mens
 
 	return retorno;
 }
+
+int modificarNombre (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR],	char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
+{
+	int retorno;
+	char nombreModificado[51];
+
+	retorno = -1;
+
+
+	retorno = pedirNombre(mensajeModificar, mensajeErrorModificar, mensajeExitoModificar, nombreModificado);
+	if (retorno != -1)
+	{
+		strcpy(pasajero->name, nombreModificado);
+	}
+
+	return retorno;
+}
+
+int modificarApellido (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
+{
+	int retorno;
+	char apellidoModificado[51];
+
+	retorno = -1;
+
+	retorno = pedirNombre(mensajeModificar, mensajeErrorModificar, mensajeExitoModificar , apellidoModificado);
+	if(retorno != -1)
+	{
+		strcpy(pasajero->lastName, apellidoModificado);
+	}
+
+	return retorno;
+}
+
+int modificarPrecio (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
+{
+	int retorno;
+	float precioModificado;
+
+	retorno = -1;
+
+	retorno = pedirFloat(mensajeModificar, mensajeErrorModificar, mensajeExitoModificar, &precioModificado);
+	if(retorno != -1)
+	{
+		pasajero->price = precioModificado;
+	}
+
+	return retorno;
+}
+
+int modificarTipoDePasajero(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero,
+					int minimo, int maximo)
+{
+	int retorno;
+	int tipoDePasajeroModificado;
+
+	retorno = -1;
+
+	retorno = pedirInt(mensajeModificar, mensajeErrorModificar, mensajeExitoModificar, &tipoDePasajeroModificado, 0, 4);
+	if(retorno != -1)
+	{
+		pasajero->typePassenger = tipoDePasajeroModificado;
+	}
+
+	return retorno;
+}
+
+int modificarCodigo(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
+{
+	int retorno;
+	char codigoModificado [51];
+
+	retorno = -1;
+
+	retorno = pedirCodigo(mensajeModificar, codigoModificado);
+	if(retorno != -1)
+	{
+		strcpy(pasajero->flyCode, codigoModificado);
+	}
+
+	return retorno;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

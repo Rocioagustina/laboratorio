@@ -43,12 +43,32 @@
 #define MENSAJE_ERROR_ESTADO_DEL_VUELO "Error en el ingreso del estado del vuelo \n"
 #define MENSAJE_EXITO_ESTADO_DEL_VUELO "El estado del vuelo ha sido ingresado exitosamente \n"
 #define ALTA_COMPLETA "El alta del pasajero ha sido completada exitosamente \n"
-#define MENSAJE_ID "Ingrese el ID del pasajero que quiera dar de baja: \n"
+#define MENSAJE_ID "Ingrese el ID del pasajero: \n"
 #define MENSAJE_ERROR_ID "Error en el ingreso del ID \n"
 #define MENSAJE_EXITO_ID "El ID fue ingresado correctamente \n"
 #define MENSAJE_ERROR_BAJA "Error en la baja, no pudo realizarse \n"
 #define MENSAJE_EXITO_BAJA "La baja del pasajero ha sido completada exitosamente \n"
-#define MENSAJE_ID_NO_ENCONTRADO "ID no encontrado"
+#define MENSAJE_ID_NO_ENCONTRADO "ID no encontrado \n"
+#define MENSAJE_PEDIR_OPCION "Ingrese una opcion: \n"
+#define MENSAJE_MODIFICAR "Ingrese el dato que desea modificar: \n"
+#define MENSAJE_ERROR_MODIFICAR "Error en la baja, no pudo realizarse \n"
+#define MENSAJE_EXITO_MODIFICAR "La modificacion ha sido completada exitosamente \n"
+#define MENSAJE_MODIFICAR_NOMBRE "Ingrese el nuevo nombre \n"
+#define MENSAJE_ERROR_MODIFICAR_NOMBRE "Error en el ingreso del nombre, no se pudo modificar \n"
+#define MENSAJE_EXITO_MODIFICAR_NOMBRE "El nombre ha sido modificado exitosamente \n"
+#define MENSAJE_MODIFICAR_APELLIDO "Ingrese el nuevo apellido \n"
+#define MENSAJE_ERROR_MODIFICAR_APELLIDO "Error en el ingreso del apellido, no se pudo modificar \n"
+#define MENSAJE_EXITO_MODIFICAR_APELLIDO "El apellido ha sido modificado exitosamente \n"
+#define MENSAJE_MODIFICAR_PRECIO "Ingrese el nuevo precio \n"
+#define MENSAJE_ERROR_MODIFICAR_PRECIO "Error en el ingreso del precio, no se pudo modificar \n"
+#define MENSAJE_EXITO_MODIFICAR_PRECIO "El precio fue modificado exitosamente \n"
+#define MENSAJE_MODIFICAR_TIPO_DE_PASAJERO "Ingrese el nuevo tipo de pasajero \n"
+#define MENSAJE_ERROR_MODIFICAR_TIPO_DE_PASAJERO "Error en el ingreso del tipo de pasajero, no se pudo modificar \n"
+#define MENSAJE_EXITO_MODIFICAR_TIPO_DE_PASAJERO "El tipo de pasajero fue modificado exitosamente \n"
+#define MENSAJE_MODIFICAR_CODIGO_DE_VUELO "Ingrese el nuevo codigo \n"
+#define MENSAJE_ERROR_MODIFICAR_CODIGO_DE_VUELO "Error en el ingreso del codigo, no se pudo modificar \n"
+#define MENSAJE_EXITO_MODIFICAR_CODIGO_DE_VUELO "El codigo fue modificado exitosamente \n"
+#define FIN_DEL_PROCESO "Programa cerrado con exito"
 
 
 
@@ -95,14 +115,19 @@ int main(void) {
 			}
 
 			break;
-		case 2:
+		case 2: modificarAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_PEDIR_OPCION,
+				MENSAJE_MODIFICAR, MENSAJE_ERROR_MODIFICAR, MENSAJE_EXITO_MODIFICAR, MENSAJE_MODIFICAR_NOMBRE, MENSAJE_ERROR_MODIFICAR_NOMBRE,
+				MENSAJE_EXITO_MODIFICAR_NOMBRE, MENSAJE_MODIFICAR_APELLIDO, MENSAJE_ERROR_MODIFICAR_APELLIDO, MENSAJE_EXITO_MODIFICAR_APELLIDO,
+				MENSAJE_MODIFICAR_PRECIO, MENSAJE_ERROR_MODIFICAR_PRECIO, MENSAJE_EXITO_MODIFICAR_PRECIO, MENSAJE_MODIFICAR_TIPO_DE_PASAJERO,
+				MENSAJE_ERROR_MODIFICAR_TIPO_DE_PASAJERO, MENSAJE_EXITO_MODIFICAR_TIPO_DE_PASAJERO, MENSAJE_MODIFICAR_CODIGO_DE_VUELO,
+				MENSAJE_ERROR_MODIFICAR_CODIGO_DE_VUELO, MENSAJE_EXITO_MODIFICAR_CODIGO_DE_VUELO);
 			break;
-		case 3: DarBajaAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_ERROR_BAJA,
+		case 3: darBajaAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_ERROR_BAJA,
 				MENSAJE_EXITO_BAJA, MENSAJE_ID_NO_ENCONTRADO);
 			break;
 		case 4:
 			break;
-		case 5:
+		case 5: printf(FIN_DEL_PROCESO);
 			break;
 		}
 	}while(opcion != 5);
