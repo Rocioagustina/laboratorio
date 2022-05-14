@@ -13,6 +13,10 @@ struct
 {
  int id;
  char estado[TAM_ESTADO];
-}typedef StatusFlight;
+} typedef StatusFlight;
+
+void inicializarEstadoDelVuelo(StatusFlight listStatusFlight [3]);
+
+void mostrarEstadoDelVuelo(StatusFlight listStatusFlight [3]);
 
 #endif /* ARRAYSTATUSFLIGHT_H_ */

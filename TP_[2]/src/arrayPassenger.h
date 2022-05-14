@@ -21,4 +21,17 @@ struct
  int isEmpty;
 }typedef Passenger;
 
+void initPassengers(Passenger *listPassenger, int tamanioDelArray);
+
+int findPassengerById(Passenger *listPassenger, int tamanioDelArray, int id);
+
+void printPassengers(Passenger listPassenger [2000]);
+
+void mostrarUnPasajero(Passenger pasajero);
+
+void removePassenger(Passenger *pasajero);
+
+void addPassengers(Passenger *isEmpty, Passenger pasajeroCargado);
+
+
 #endif /* ARRAYPASSENGER_H_ */

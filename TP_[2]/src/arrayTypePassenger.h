@@ -18,4 +18,6 @@ struct
 
 void inicializarTipoDePasajero (TypePassenger listTypePassenger [3]);
 
+void mostrarTipoDePasajero(TypePassenger listTypePassenger [3]);
+
 #endif /* ARRAYTYPEPASSENGER_H_ */

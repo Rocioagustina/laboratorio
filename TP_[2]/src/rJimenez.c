@@ -8,11 +8,20 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "rJimenez.h"
+#include "arrayPassenger.h"
 
 #define TAM_STR 256
 #define TAM_NOMBRE 51
 #define TAM_INT 20
+#define ELECCION_DE_MODIFICACION "¿Que dato desea modificar?\n\n"
+#define MODIFICAR_NOMBRE "1. Nombre\n"
+#define MODIFICAR_APELLIDO "2. Apellido\n"
+#define MODIFICAR_PRECIO "3. Precio\n"
+#define MODIFICAR_TIPO_DE_PASAJERO "4. Tipo de pasajero\n"
+#define MODIFICAR_CODIGO_DE_VUELO "5. Codigo de vuelo\n"
+
 
 /// @fn int pedirFloat(char[], char[], char[], float*)
 /// @brief Pide y valida un numero flotante.
@@ -28,7 +37,7 @@ int pedirFloat (char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensaj
 	int retorno;
 	char floatSinValidar [TAM_STR];
 
-	retorno = 0;
+	retorno = 1;
 
 	printf(mensaje);
 	scanf("%s", floatSinValidar);
@@ -37,17 +46,16 @@ int pedirFloat (char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensaj
 	{
 		printf(mensajeExito);
 		*pResultado = atof(floatSinValidar);
-		retorno = 1;
+		retorno = 0;
 	}
 	else
 	{
 		printf(mensajeError);
 	}
 
-
-
 	return retorno;
 }
+
 
 /// @fn int validarFloat(char[])
 /// @brief Valida un numero flotante.
@@ -87,6 +95,15 @@ int validarFloat (char resultado [TAM_STR])
 	return retorno;
 }
 
+/// @fn int pedirNombre(char[], char[], char[], char*)
+/// @brief Pide una cadena de caracteres
+///
+/// @param mensaje El mensaje para pedir el nombre
+/// @param mensajeError El mensaje que devuelve si se ingreso mal el nombre
+/// @param mensajeExito El mensaje que devuelve si se ingreso bien el nombre
+/// @param pResultadoNombre El puntero donde se guarda el nombre
+/// @return 0 si sale todo bien y 1 si hay algun error
+
 int pedirNombre (char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensajeExito [TAM_STR], char *pResultadoNombre)
 {
 	int retorno;
@@ -100,12 +117,22 @@ int pedirNombre (char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensa
 	if(validarNombre(nombreSinValidar) == 0)
 	{
 		retorno = 0;
-		strncopy(pResultadoNombre, nombreSinValidar);
+		strcpy(pResultadoNombre, nombreSinValidar);
+		printf(mensajeExito);
 	}
-
+	else
+	{
+		printf(mensajeError);
+	}
 
 	return retorno;
 }
+
+/// @fn int validarNombre(char[])
+/// @brief Valida una cadena de caracteres
+///
+/// @param nombreSinValidar El nombre a validar
+/// @return 0 si sale todo bien y 1 si hay algun error
 
 int validarNombre (char nombreSinValidar [TAM_NOMBRE])
 {
@@ -123,11 +150,18 @@ int validarNombre (char nombreSinValidar [TAM_NOMBRE])
 		}
 	}
 
-
 	return retorno;
 }
 
-int pedirCodigo (char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensajeExito [TAM_STR], char *pResultadoCodigo)
+
+/// @fn int pedirCodigo(char[], char[], char[], char*)
+/// @brief Pide el codigo del vuelo
+///
+/// @param mensaje El mensaje para pedir el codigo
+/// @param pResultadoCodigo El puntero donde se guarda el codigo
+/// @return 0
+
+int pedirCodigo (char mensaje [TAM_STR], char *pResultadoCodigo)
 {
 	int retorno;
 
@@ -139,29 +173,55 @@ int pedirCodigo (char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensa
 	return retorno;
 }
 
-int PedirInt(char mensaje [TAM_STR], int *pResultadoInt)
+
+/// @fn int pedirInt(char[], int*)
+/// @brief Pide un numero entero
+///
+/// @param mensaje Es el mensaje que pide un numero entero
+/// @param pResultadoInt El puntero donde se guarda el entero
+/// @return 0 si sale todo bien y 1 si hay algun error
+
+int pedirInt(char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensajeExito [TAM_STR], int *pResultadoInt, int minimo, int maximo)
 {
 	int retorno;
 	char numeroSinValidar [TAM_INT];
+	int numeroNoValidado;
+
 	retorno = 0;
 
 	printf(mensaje);
 	scanf("%s", numeroSinValidar);
 
-	if (ValidarInt(numeroSinValidar) == 0)
+	if (validarInt(numeroSinValidar) == 0)
 	{
-		*pResultadoInt = atoi(numeroSinValidar);
+		numeroNoValidado = atoi(numeroSinValidar);
 
+		if(numeroNoValidado < maximo && numeroNoValidado > minimo)
+		{
+			*pResultadoInt = numeroNoValidado;
+			printf(mensajeExito);
+		}
+		else
+		{
+			retorno = 1;
+			printf(mensajeError);
+		}
 	} else
 	{
 		retorno = 1;
+		printf(mensajeError);
 	}
 
 	return retorno;
 }
 
+/// @fn int validarInt(char[])
+/// @brief Valida que el numero sea un entero
+///
+/// @param pResultadoInt Es el puntero donde se guarda el entero validado
+/// @return 0 si sale todo bien y 1 si hay algun error
 
-int ValidarInt(char pResultadoInt [TAM_INT])
+int validarInt(char pResultadoInt [TAM_INT])
 {
 	int retorno;
 	int i;
@@ -176,6 +236,227 @@ int ValidarInt(char pResultadoInt [TAM_INT])
 			break;
 		}
 	}
+
+	return retorno;
+}
+
+/// @fn int pedirTipoDePasajero(TypePassenger[], char[], char[], char[], int*)
+/// @brief Pide el tipo de pasajero
+///
+/// @param listTypePassenger
+/// @param mensaje Es el mensaje que pide el tipo de pasajero
+/// @param mensajeError Es el mensaje que indica que hay un error en lo que se ingreso
+/// @param mensajeExito Es el mensaje que indica que lo que se ingreso esta bien
+/// @param pResultadoInt Es el puntero donde se guarda el tipo de pasajero
+/// @return 0 si esta todo bien y 1 si hay algun error
+
+int pedirTipoDePasajero(TypePassenger listTypePassenger [3], char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensajeExito [TAM_STR],
+					int *pResultadoInt, int minimo, int maximo)
+{
+	int retorno;
+
+	retorno = 0;
+
+	mostrarTipoDePasajero(listTypePassenger);
+
+	if(pedirInt(mensaje, mensajeError, mensajeExito, pResultadoInt, minimo, maximo) == 0)
+	{
+		printf(mensajeExito);
+	}
+	else
+	{
+		printf(mensajeError);
+		retorno = 1;
+	}
+
+	return retorno;
+}
+
+
+/// @fn int pedirEstadoDeVuelo(StatusFlight[], char[], char[], char[], int*)
+/// @brief Pide el estado del vuelo
+///
+/// @param listStatusFlight
+/// @param mensaje Es Es el mensaje que pide el estado del vuelo
+/// @param mensajeError Es el mensaje que indica que hay un error en lo que se ingreso
+/// @param mensajeExito Es el mensaje que indica que lo que se ingreso esta bien
+/// @param pResultadoInt Es el puntero donde se guarda el estado del vuelo
+/// @return 0 si esta todo bien y 1 si hay algun error
+
+int pedirEstadoDeVuelo(StatusFlight listStatusFlight [3], char mensaje [TAM_STR], char mensajeError [TAM_STR], char mensajeExito [TAM_STR],
+					int *pResultadoInt, int minimo, int maximo)
+{
+	int retorno;
+
+	retorno = 0;
+
+	mostrarEstadoDelVuelo(listStatusFlight);
+
+	if(pedirInt(mensaje, mensajeError, mensajeExito, pResultadoInt, minimo, maximo) == 0)
+	{
+		printf(mensajeExito);
+	}
+	else
+	{
+		printf(mensajeError);
+		retorno = 1;
+	}
+
+
+	return retorno;
+}
+
+/// @fn int buscarLibre(Passenger*, int)
+/// @brief Busca un lugar libre en el array para posicionar el id
+///
+/// @param listPassenger
+/// @param tamanioDelArray
+/// @return -1 si no hay mas lugar y un numero si encontro un lugar
+
+int buscarLibre(Passenger *listPassenger, int tamanioDelArray)
+{
+	int retorno;
+	int i;
+
+	retorno = -1;
+
+	for(i = 0; i < tamanioDelArray; i++)
+	{
+		if(listPassenger[i].isEmpty != 0)
+		{
+			retorno = i;
+			break;
+		}
+	}
+
+	return retorno;
+}
+
+
+
+/// @fn int darAltaAlPasajero(Passenger*, int)
+/// @brief
+///
+/// @param listPassenger
+/// @param tamanioDelArray
+/// @return
+
+int darAltaAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensajeNombre [TAM_STR], char mensajeErrorNombre [TAM_STR],
+					char mensajeExitoNombre [TAM_STR], char mensajeErrorArray [TAM_STR], char mensajeApellido [TAM_STR], char mensajeErrorApellido [TAM_STR],
+					char mensajeExitoApellido [TAM_STR], char mensajePrecio [TAM_STR], char mensajeErrorPrecio [TAM_STR], char mensajeExitoPrecio [TAM_STR],
+					char mensajeCodigo [TAM_STR], char mensajeTipoDePasajero [TAM_STR], char mensajeErrorTipoDePasajero [TAM_STR],
+					char mensajeExitoTipoDePasajero [TAM_STR], char mensajeEstadoDeVuelo [TAM_STR], char mensajeErrorEstadoDeVuelo [TAM_STR],
+					char mensajeExitoEstadoDeVuelo [TAM_STR], TypePassenger *listTypePassenger, StatusFlight *listStatusFlight,
+					char mensajeCargaCompleta [TAM_STR], int id, int minimo, int maximo)
+{
+	int retorno;
+	Passenger aux;
+	int indice;
+
+	retorno = -1;
+
+
+	indice = buscarLibre(listPassenger, tamanioDelArray);
+
+	if(indice != -1)
+	{
+		if(pedirNombre(mensajeNombre, mensajeErrorNombre, mensajeExitoNombre, aux.name) == 0)
+		{
+			if(pedirNombre(mensajeApellido, mensajeErrorApellido, mensajeExitoApellido, aux.lastName) == 0)
+			{
+				if(pedirFloat(mensajePrecio, mensajeErrorPrecio, mensajeExitoPrecio, &aux.price) == 0)
+				{
+					if(pedirCodigo(mensajeCodigo, aux.flyCode) == 0)
+					{
+						if(pedirTipoDePasajero(listTypePassenger, mensajeTipoDePasajero, mensajeErrorTipoDePasajero, mensajeExitoTipoDePasajero,
+								&aux.typePassenger, minimo, maximo) == 0)
+						{
+							if(pedirEstadoDeVuelo(listStatusFlight, mensajeEstadoDeVuelo, mensajeErrorEstadoDeVuelo, mensajeExitoEstadoDeVuelo,
+								&aux.statusFlight, minimo, maximo) == 0)
+							{
+								printf(mensajeCargaCompleta);
+								aux.id = id;
+								aux.isEmpty = 0;
+								addPassengers(&listPassenger[indice], aux);
+								retorno = 0;
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		printf(mensajeErrorArray);
+	}
+
+
+	return retorno;
+}
+
+int DarBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
+					char mensajeExitoId [TAM_STR], char mensajeErrorBaja [TAM_STR], char mensajeExitoBaja [TAM_STR], char mensajeErrorIdNoEncontrado [TAM_STR])
+{
+	int retorno;
+	int idBorrar;
+	int indice;
+
+
+	retorno = 1;
+
+	 printPassengers(listPassenger);
+
+	 if(pedirInt(mensajeId, mensajeErrorId, mensajeExitoId, &idBorrar, 0, tamanioDelArray) == 0)
+	 {
+		 indice = findPassengerById(listPassenger, tamanioDelArray, idBorrar);
+		 if(indice != -1)
+		 {
+			 removePassenger(&listPassenger[indice]);
+			 printf(mensajeExitoBaja);
+			 retorno = 0;
+		 } else
+		 {
+			 printf(mensajeErrorIdNoEncontrado);
+		 }
+	 }
+	 else
+	 {
+		 printf(mensajeErrorBaja);
+	 }
+
+	return retorno;
+}
+
+int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
+					char mensajeExitoId [TAM_STR], char mensajeOpcion [TAM_STR])
+{
+	int retorno;
+	int idBorrar;
+	int indice;
+
+	retorno = 1;
+
+	printPassengers(listPassenger);
+
+	if(pedirInt(mensajeId, mensajeErrorId, mensajeExitoId, &idBorrar, 0, tamanioDelArray))
+	{
+		 indice = findPassengerById(listPassenger, tamanioDelArray, idBorrar);
+		 if(indice != -1)
+		 {
+			 printf(ELECCION_DE_MODIFICACION);
+			 printf(MODIFICAR_NOMBRE);
+			 printf(MODIFICAR_APELLIDO);
+			 printf(MODIFICAR_PRECIO);
+			 printf(MODIFICAR_TIPO_DE_PASAJERO);
+			 printf(MODIFICAR_CODIGO_DE_VUELO);
+
+
+
+		 }
+	}
+
 
 	return retorno;
 }
