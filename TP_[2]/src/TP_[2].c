@@ -87,6 +87,7 @@ int main(void) {
 	initPassengers(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS);
 	inicializarTipoDePasajero(arrayTipoDePasajero);
 	inicializarEstadoDelVuelo(arrayEstadoDeVuelo);
+	HardcodePasajero(arrayPasajeros);
 
 
 	do

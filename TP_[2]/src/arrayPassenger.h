@@ -33,5 +33,10 @@ void removePassenger(Passenger *pasajero);
 
 void addPassengers(Passenger *isEmpty, Passenger pasajeroCargado);
 
+void HardcodePasajero (Passenger listPassenger [2000]);
+
+void sortPassengers(Passenger *listPassenger, int tamanioDelArray);
+
+void swapPassenger(Passenger *pasajeroA, Passenger *pasajeroB);
 
 #endif /* ARRAYPASSENGER_H_ */
