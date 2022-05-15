@@ -430,6 +430,7 @@ int darBajaAlPasajero (Passenger *listPassenger, int tamanioDelArray, char mensa
 	return retorno;
 }
 
+
 int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mensajeId [TAM_STR], char mensajeErrorId [TAM_STR],
 					char mensajeExitoId [TAM_STR], char mensajeOpcion [TAM_STR], char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR],
 					char mensajeExitoModificar [TAM_STR], char mensajeModificarNombre [TAM_STR], char mensajeErrorModificarNombre [TAM_STR],
@@ -535,6 +536,7 @@ int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mens
 	return retorno;
 }
 
+
 int modificarNombre (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR],	char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
 {
 	int retorno;
@@ -552,6 +554,7 @@ int modificarNombre (char mensajeModificar [TAM_STR], char mensajeErrorModificar
 	return retorno;
 }
 
+
 int modificarApellido (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
 {
 	int retorno;
@@ -568,6 +571,7 @@ int modificarApellido (char mensajeModificar [TAM_STR], char mensajeErrorModific
 	return retorno;
 }
 
+
 int modificarPrecio (char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
 {
 	int retorno;
@@ -583,6 +587,7 @@ int modificarPrecio (char mensajeModificar [TAM_STR], char mensajeErrorModificar
 
 	return retorno;
 }
+
 
 int modificarTipoDePasajero(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero,
 					int minimo, int maximo)
@@ -601,6 +606,7 @@ int modificarTipoDePasajero(char mensajeModificar [TAM_STR], char mensajeErrorMo
 	return retorno;
 }
 
+
 int modificarCodigo(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero)
 {
 	int retorno;
@@ -618,15 +624,67 @@ int modificarCodigo(char mensajeModificar [TAM_STR], char mensajeErrorModificar 
 }
 
 
+void totalPromedioPasajero (Passenger *listPassenger, int tamanioDelArray)
+{
+	int contador;
+	float promedio;
+	float acumulador;
+	int i;
 
 
+	contador = 0;
+	acumulador = 0;
+
+	for (i = 0; i < tamanioDelArray; i++)
+	{
+		if (listPassenger[i].isEmpty == 0)
+		{
+			acumulador = listPassenger[i].price;
+			contador++;
+		}
+	}
+	promedio = acumulador / contador;
+
+	printf ("El total de precios acumulados es: %f\n", acumulador);
+	printf ("El promedio de todos los precios es: %f\n", promedio);
+	printf ("Los pasajeros que superan el promedio del precio son: \n");
+
+	for (i = 0; i < tamanioDelArray; i++)
+	{
+		if (listPassenger[i].price > promedio && listPassenger[i].isEmpty == 0)
+		{
+			mostrarUnPasajero(listPassenger[i]);
+		}
+	}
+}
 
 
+void mostrarOrdenadoPorApelidoTipo(Passenger *listPassenger, int tamanioDelArray)
+{
+	Passenger *aux;
+
+	aux = listPassenger;
+
+	sortPassengers(aux, tamanioDelArray);
+
+	printPassengers(aux);
+}
 
 
+void ordenadoCodigoActivo(Passenger *listPassenger, int tamanioDelArray)
+{
+	int i;
+	Passenger *aux;
+	aux = listPassenger;
 
+	sortPassengersByCode(aux, tamanioDelArray);
+	printf("Los empleados ordenados por codigo con estado activo son: \n");
 
-
-
-
-
+	for (i = 0; i < tamanioDelArray; i++)
+	{
+		if (aux[i].isEmpty == 0 && aux[i].statusFlight == 1)
+		{
+			mostrarUnPasajero(aux[i]);
+		}
+	}
+}

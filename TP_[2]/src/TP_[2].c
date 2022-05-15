@@ -68,7 +68,8 @@
 #define MENSAJE_MODIFICAR_CODIGO_DE_VUELO "Ingrese el nuevo codigo \n"
 #define MENSAJE_ERROR_MODIFICAR_CODIGO_DE_VUELO "Error en el ingreso del codigo, no se pudo modificar \n"
 #define MENSAJE_EXITO_MODIFICAR_CODIGO_DE_VUELO "El codigo fue modificado exitosamente \n"
-#define FIN_DEL_PROCESO "Programa cerrado con exito"
+#define FIN_DEL_PROCESO "Programa cerrado con exito\n"
+#define OPCION_INVALIDA "La opcion ingresada es invalida\n"
 
 
 
@@ -96,9 +97,6 @@ int main(void) {
 		printf(MENSAJE_OPCION_DOS);
 		printf(MENSAJE_OPCION_TRES);
 		printf(MENSAJE_OPCION_CUATRO);
-		printf(MENSAJE_INFORMAR_UNO);
-		printf(MENSAJE_INFORMAR_DOS);
-		printf(MENSAJE_INFORMAR_TRES);
 		printf(MENSAJE_OPCION_CINCO);
 		scanf("%d", &opcion);
 
@@ -116,20 +114,42 @@ int main(void) {
 			}
 
 			break;
-		case 2: modificarAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_PEDIR_OPCION,
+		case 2:
+			modificarAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_PEDIR_OPCION,
 				MENSAJE_MODIFICAR, MENSAJE_ERROR_MODIFICAR, MENSAJE_EXITO_MODIFICAR, MENSAJE_MODIFICAR_NOMBRE, MENSAJE_ERROR_MODIFICAR_NOMBRE,
 				MENSAJE_EXITO_MODIFICAR_NOMBRE, MENSAJE_MODIFICAR_APELLIDO, MENSAJE_ERROR_MODIFICAR_APELLIDO, MENSAJE_EXITO_MODIFICAR_APELLIDO,
 				MENSAJE_MODIFICAR_PRECIO, MENSAJE_ERROR_MODIFICAR_PRECIO, MENSAJE_EXITO_MODIFICAR_PRECIO, MENSAJE_MODIFICAR_TIPO_DE_PASAJERO,
 				MENSAJE_ERROR_MODIFICAR_TIPO_DE_PASAJERO, MENSAJE_EXITO_MODIFICAR_TIPO_DE_PASAJERO, MENSAJE_MODIFICAR_CODIGO_DE_VUELO,
 				MENSAJE_ERROR_MODIFICAR_CODIGO_DE_VUELO, MENSAJE_EXITO_MODIFICAR_CODIGO_DE_VUELO);
 			break;
-		case 3: darBajaAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_ERROR_BAJA,
+		case 3:
+			darBajaAlPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS, MENSAJE_ID, MENSAJE_ERROR_ID, MENSAJE_EXITO_ID, MENSAJE_ERROR_BAJA,
 				MENSAJE_EXITO_BAJA, MENSAJE_ID_NO_ENCONTRADO);
 			break;
 		case 4:
+			printf(MENSAJE_INFORMAR_UNO);
+			printf(MENSAJE_INFORMAR_DOS);
+			printf(MENSAJE_INFORMAR_TRES);
+			scanf("%d", &opcion);
+			switch (opcion)
+			{
+				case 1:
+					mostrarOrdenadoPorApelidoTipo(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS);
+					break;
+				case 2:
+					totalPromedioPasajero(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS);
+					break;
+				case 3:
+					ordenadoCodigoActivo(arrayPasajeros, TAMANIO_ARRAY_PASAJEROS);
+					break;
+				default:
+					printf(OPCION_INVALIDA);
+			}
 			break;
 		case 5: printf(FIN_DEL_PROCESO);
 			break;
+		default:
+			printf(OPCION_INVALIDA);
 		}
 	}while(opcion != 5);
 

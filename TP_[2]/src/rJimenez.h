@@ -72,6 +72,10 @@ int modificarTipoDePasajero(char mensajeModificar [TAM_STR], char mensajeErrorMo
 
 int modificarCodigo(char mensajeModificar [TAM_STR], char mensajeErrorModificar [TAM_STR], char mensajeExitoModificar [TAM_STR], Passenger *pasajero);
 
+void totalPromedioPasajero (Passenger *listPassenger, int tamanioDelArray);
 
+void ordenadoCodigoActivo(Passenger *listPassenger, int tamanioDelArray);
+
+void mostrarOrdenadoPorApelidoTipo(Passenger *listPassenger, int tamanioDelArray);
 
 #endif /* RJIMENEZ_H_ */
