@@ -259,16 +259,10 @@ int pedirTipoDePasajero(TypePassenger listTypePassenger [3], char mensaje [TAM_S
 
 	mostrarTipoDePasajero(listTypePassenger);
 
-	if(pedirInt(mensaje, mensajeError, mensajeExito, pResultadoInt, minimo, maximo) == 0)
+	if(pedirInt(mensaje, mensajeError, mensajeExito, pResultadoInt, minimo, maximo) == 1)
 	{
-		printf(mensajeExito);
-	}
-	else
-	{
-		printf(mensajeError);
 		retorno = 1;
 	}
-
 	return retorno;
 }
 
@@ -292,17 +286,10 @@ int pedirEstadoDeVuelo(StatusFlight listStatusFlight [3], char mensaje [TAM_STR]
 
 	mostrarEstadoDelVuelo(listStatusFlight);
 
-	if(pedirInt(mensaje, mensajeError, mensajeExito, pResultadoInt, minimo, maximo) == 0)
+	if(pedirInt(mensaje, mensajeError, mensajeExito, pResultadoInt, minimo, maximo) == 1)
 	{
-		printf(mensajeExito);
-	}
-	else
-	{
-		printf(mensajeError);
 		retorno = 1;
 	}
-
-
 	return retorno;
 }
 
@@ -449,7 +436,7 @@ int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mens
 
 	printPassengers(listPassenger);
 
-	if(pedirInt(mensajeId, mensajeErrorId, mensajeExitoId, &idBorrar, 0, tamanioDelArray))
+	if(pedirInt(mensajeId, mensajeErrorId, mensajeExitoId, &idBorrar, 0, tamanioDelArray) == 0)
 	{
 		 indice = findPassengerById(listPassenger, tamanioDelArray, idBorrar);
 		 if(indice != -1)
@@ -462,18 +449,13 @@ int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mens
 			 printf(MODIFICAR_TIPO_DE_PASAJERO);
 			 printf(MODIFICAR_CODIGO_DE_VUELO);
 			 printf(mensajeOpcion);
-			 pedirInt(mensajeModificar, mensajeErrorModificar, mensajeExitoModificar, &opcion, 1,5);
+			 pedirInt(mensajeModificar, "Error en la modificacion", "Opcion ingresada correctamente", &opcion, 0,6);
 
 			 switch(opcion)
 			 {
 			 case 1: if(modificarNombre (mensajeModificarNombre, mensajeErrorModificarNombre, mensajeExitoModificarNombre, &listPassenger[indice]) != -1)
 					 {
-						printf(mensajeExitoModificarNombre);
 						retorno = 0;
-					 }
-					 else
-					 {
-						printf(mensajeErrorModificarNombre);
 					 }
 					break;
 
@@ -481,54 +463,30 @@ int modificarAlPasajero(Passenger *listPassenger, int tamanioDelArray, char mens
 			 case 2: if(modificarApellido(mensajeModificarApellido, mensajeErrorModificarApellido, mensajeExitoModificarApellido, &listPassenger[indice])
 					 != -1)
 					 {
-						 printf(mensajeExitoModificarApellido);
 						 retorno = 0;
 					 }
-					 else
-					 {
-						 printf(mensajeErrorModificarApellido);
-					 }
-
 			 	 	break;
 
 			 case 3: if(modificarPrecio(mensajeModificarPrecio, mensajeErrorModificarPrecio, mensajeExitoModificarPrecio, &listPassenger[indice]) != -1)
 			 	 	 {
-				 	 	 printf(mensajeExitoModificarPrecio);
 				 	 	 retorno = 0;
-			 	 	 }
-			 	 	 else
-			 	 	 {
-			 	 		 printf(mensajeErrorModificarPrecio);
 			 	 	 }
 				 break;
 
 			 case 4: if(modificarTipoDePasajero(mensajeModificarTipoDePasajero, mensajeErrorModificarTipoDePasajero, mensajeExitoModificarTipoDePasajero,
 					 &listPassenger[indice], 0, 4) != -1)
 			 	 	 {
-				 	 	 printf(mensajeExitoModificarTipoDePasajero);
 				 	 	 retorno = 0;
-			 	 	 }
-			 	 	 else
-			 	 	 {
-			 	 		 printf(mensajeErrorModificarTipoDePasajero);
 			 	 	 }
 				 break;
 
 			 case 5:if(modificarCodigo(mensajeModificarCodigoDeVuelo, mensajeErrorModificarCodigoDeVuelo, mensajeExitoModificarCodigoDeVuelo,
 					 &listPassenger[indice]) != -1)
 			 	 	 {
-				 	 	 printf(mensajeExitoModificarCodigoDeVuelo);
 				 	 	 retorno = 0;
-			 	 	 }
-			 	 	 else
-			 	 	 {
-			 	 		 printf(mensajeErrorModificarCodigoDeVuelo);
 			 	 	 }
 				 break;
 			 }
-
-
-
 		 }
 	}
 
